@@ -19,8 +19,9 @@ import Starscream
 import IBMSwiftSDKCore
 
 internal class SpeechToTextSocket: WebSocketDelegate {
+    
     // TODO: need to figure out what this does
-    func didReceive(event: WebSocketEvent, client: WebSocket) {
+    func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) {
         switch event {
         case .connected(let headers):
             self.websocketDidConnect(socket: client)
@@ -39,6 +40,8 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         case .reconnectSuggested:
             break
         case .cancelled:
+            break
+        case .peerClosed:
             break
         case .error(let error):
             self.websocketDidDisconnect(socket: client, error: error)
